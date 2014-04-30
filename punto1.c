@@ -133,7 +133,9 @@ int main(int argc, char **argv)
       copy(u_present,u_past,n_points);
       copy(u_future,u_present,n_points);
 
-       //Ahora exportamos los datos en un archivo .dat
+    }
+  
+   //Ahora exportamos los datos en un archivo .dat
   
       FILE *in =fopen("datos.dat","w");
       for(i=0;i<n_points;i++)
@@ -141,9 +143,6 @@ int main(int argc, char **argv)
 	  fprintf(in,"%f %f \n",x[i],u_present[i]);
 	}
       fclose(in);
-    }
-  
- 
    
   return 0;
   
