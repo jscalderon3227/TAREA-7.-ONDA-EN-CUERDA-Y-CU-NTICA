@@ -57,7 +57,7 @@ int main(int argc, char **argv)
   float xmax=L;
 
   float deltax=(xmax-xmin)/(n_points);
-  float deltat=0.0005;
+  float deltat=0.5;
 
   //Velocidad de la onda
   float c=sqrt(T/d);
@@ -128,8 +128,9 @@ int main(int argc, char **argv)
     {
       for(i=1;i<n_points-1;i++)
 	{
-	  u_future[i]=(2.0*(1.0-pow(r,2))*u_present[i])-u_past[i]+(pow(r,2))*(u_present[i+1]+u_present[i-1]);
+	   u_future[i]=(2.0*(1.0-pow(r,2))*u_present[i])-u_past[i]+(pow(r,2))*(u_present[i+1]+u_present[i-1]);	  
 	}
+
       copy(u_present,u_past,n_points);
       copy(u_future,u_present,n_points);
 
