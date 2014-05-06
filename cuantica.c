@@ -38,8 +38,8 @@ int main(int argc, char **argv)
    
    //Divisiones del espacio
    int n_points=1000;
-   float x_min=0.0;
-   float x_max=12.0;
+   float x_min=4.0;
+   float x_max=6.0;
    
    //Parámetros de la ecuacion de onda inicial
    float sigma=0.05;
@@ -95,6 +95,10 @@ int main(int argc, char **argv)
    x[0]=x_min;
    x[n_points-1]=x_max;
 
+   R_future[0]=0.0;
+   R_future[n_points-1]=0.0;
+ 
+
    //Llenamos las divisiones en el tiempo y con eso definimos el potencial a lo largo de la posición y las funciones iniciales
    for(i=1;i<n_points-1;i++)
     {
@@ -110,7 +114,6 @@ int main(int argc, char **argv)
       I_initial[i]=exp(-0.5*pow((x[i]-5)/sigma,2))*sin(k*x[i]); 
     }
      
-     
    //Redefinimos nuestras funciones para el siguiente paso 
    copy(R_initial,R_present,n_points);
    copy(I_initial,I_present,n_points);
@@ -123,11 +126,14 @@ int main(int argc, char **argv)
        R_future[i]=R_present[i]-2*((alpha*(I_present[i+1]+I_present[i-1]))-(2*I_present[i]*(alpha+(deltat*V[i]))));
        I_future[i]=I_present[i]+2*((alpha*(R_present[i+1]+R_present[i-1]))-(2*R_present[i]*(alpha+(V[i]*deltat))));  
      }
-      density[i]=pow(R_present[i],2)+pow(I_present[i],2);
+     
       copy(R_future,R_present,n_points);
       copy(I_future,I_present,n_points);
     }
-   
+   for(i=0;i<n_points;i++)
+     {
+        density[i]=pow(R_present[i],2)+pow(I_present[i],2);
+     }
    //Ahora exportamos los datos a un archivo
    FILE *in =fopen("datos.dat","w");
       for(i=0;i<n_points;i++)
