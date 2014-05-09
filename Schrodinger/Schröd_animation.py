@@ -39,7 +39,7 @@ line, = ax.plot(x, y)
 
 def animate(i):
     #i = (i)%len(x_t)
-    i = i%len(x_t)
+    #i = i%len(x_t)
     line.set_ydata(x_t[i])  # update the data
     return line,
 
@@ -49,7 +49,6 @@ def init():
     return line,
 
 ani = animation.FuncAnimation(fig, animate,  init_func=init,
-    interval= 1, frames = 4000, blit = True)
-
-plt.show()
-plt.close()
+    interval= 1, frames = 1800, blit = True)
+fig.show()
+plt.close('all')

@@ -16,7 +16,7 @@
 #define k 16*3.14159
 
 // diferencial ---> temporal
-#define dt dx*dx/4.0
+#define dt dx*dx/10.0
 
 // diferencial total del algoritmo
 #define alpha dt/(2*dx*dx)
@@ -25,8 +25,8 @@
 #define FLOAT double
 
 // La frecuencia con la que se imprimen los datos
-#define imprx 1000
-#define impr 100
+#define imprx 500
+#define impr 500
 
 void initCondition( FLOAT * Re_p, FLOAT *Im_p, FLOAT * x0, int n_x );
 FLOAT V( FLOAT x );
@@ -69,6 +69,16 @@ int main( int argc, char** argv ){
 
   // Condicion inicial ( y de frontera )
   initCondition( Re_p, Im_p, x0, nx );
+
+  // Imprime la condicion inicial
+  FLOAT ro = 0;
+  fprintf(in, "%f %f ", (float) x0[0], 0.0); 
+  for( i = 1; i < nx-1; i += (int) (nx-1)/imprx ){
+    ro = Im_p[i]*Im_p[i] + Re_p[i]*Re_p[i];
+    //printf("%f\n", ro, (float) ro);
+    fprintf(in, "%f %f ", (float) x0[i], (float) ro); 
+  }
+  fprintf(in, "%f %f\n", (float) x0[nx-1], 0.0); 
   
   // Iteracion sobre el tiempo (se tiene que doblar el numero de pasos debido a la definicion de Re e Im en enteros y semienteros de tiempo)
   for( j = 0; j < 2*nt; j++ ){
