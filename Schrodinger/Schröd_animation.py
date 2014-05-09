@@ -50,5 +50,5 @@ def init():
 
 ani = animation.FuncAnimation(fig, animate,  init_func=init,
     interval= 1, frames = 1800, blit = True)
-fig.show()
+plt.show()
 plt.close('all')
