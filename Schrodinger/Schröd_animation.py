@@ -26,19 +26,15 @@ print len(z_t), len(x_t[0])
 
 fig, ax = plt.subplots()
 
-# Selecciona los limites de la grafica
-maximsy = 1
-
-limy = np.max(maximsy,0)
-limMaxz = np.max(z_t,0)
-limMinz = np.min(z_t,0) 
+# Selecciona los limites de la grafica 
+lim = 80
 
 y = x_t[0]        # y-array
 x = z_t        # x-array
 #ax.set_ylim((0,limy))
 #ax.set_xlim((-limMinz,limMaxz))
-ax.set_ylim((-0,1))
-ax.set_xlim((4,6))
+ax.set_ylim((0,1))
+ax.set_xlim((-lim,lim))
 line, = ax.plot(x, y)
 
 def animate(i):
